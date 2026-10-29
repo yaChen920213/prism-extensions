@@ -1,0 +1,26 @@
+{
+  "indexVersion": 1,
+  "generatedAt": "2026-10-29T17:08:39.718Z",
+  "extensions": [
+    {
+      "name": "batch-compress-kit",
+      "version": "1.0.0",
+      "displayName": "批量压缩套件",
+      "description": "电商出图批量压缩：一个会记住质量偏好的工具 + 一条零代码声明式流水线，产物自动归项目产物区（本地 sharp，不烧额度）。",
+      "author": "Prism Studio",
+      "homepage": "",
+      "industry": [
+        "通用"
+      ],
+      "permissions": [
+        "capabilities:run",
+        "storage"
+      ],
+      "tools": [
+        "batchCompress"
+      ],
+      "subdir": "extensions/batch-compress-kit",
+      "manifestSha256": "018a5a0b19b0e672a5dfa80ce507f6da246b08a626e70dd9b706b9b8ef662f48"
+    }
+  ]
+}

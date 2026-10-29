@@ -1,0 +1,52 @@
+{
+  "manifestVersion": 1,
+  "name": "batch-compress-kit",
+  "version": "1.0.0",
+  "displayName": "批量压缩套件",
+  "description": "电商出图批量压缩：一个会记住质量偏好的工具 + 一条零代码声明式流水线，产物自动归项目产物区（本地 sharp，不烧额度）。",
+  "author": "Prism Studio",
+  "entry": "main.js",
+  "permissions": ["capabilities:run", "storage"],
+  "budget": { "maxCostPerCall": 2, "maxDurationSec": 300 },
+  "tools": [
+    {
+      "name": "batchCompress",
+      "title": "批量压缩（记住偏好）",
+      "description": "对一批 asset:// 图片按质量压缩出 jpg；quality 缺省取上次使用值（首次 80），产物为 asset:// 引用。",
+      "write": true,
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "images": { "type": "array", "items": { "type": "string" }, "description": "asset:// 图片引用列表（1-36 张）" },
+          "quality": { "type": "number", "description": "质量 30-100（缺省用记忆值）" }
+        },
+        "required": ["images"]
+      }
+    }
+  ],
+  "flows": [
+    {
+      "id": "compress-pipeline",
+      "title": "压缩流水线",
+      "description": "纯声明式示例：入参直通 batch-process 能力，零代码零沙箱启动，runExtensionFlow 运行。",
+      "inputs": {
+        "images": "图片 asset:// 引用列表（1-36 张）",
+        "quality": "质量 30-100（必传，声明式流水线无记忆）"
+      },
+      "def": {
+        "title": "示例·批量压缩",
+        "nodes": [
+          {
+            "id": "n0",
+            "capabilityId": "batch-process",
+            "params": {
+              "images": { "$input": "images" },
+              "quality": { "$input": "quality" }
+            }
+          }
+        ],
+        "budget": { "maxCost": 2 }
+      }
+    }
+  ]
+}
